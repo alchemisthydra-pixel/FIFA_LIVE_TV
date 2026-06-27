@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSC_26 TV</title>
+    <title>HSC_2026_LIVE-TV</title>
     <style>
         /* Base Reset & Variables */
         :root {
@@ -12,17 +12,17 @@
             --bg-container: #ffffff;
             --text-primary: #0f172a;
             --text-secondary: #475569;
-            --accent: #06b67f;
-            --accent-hover: #059669;
-            --accent-gradient: linear-gradient(135deg, #06b67f, #22d3ee);
+            --accent: #ffcc00;
+            --accent-hover: #ffaa00;
+            --accent-gradient: linear-gradient(135deg, #ffd700, #ff8c00, #ffcc00);
             --card-bg: #f1f5f9;
             --border: #e2e8f0;
             --shadow: rgba(15, 23, 42, 0.08);
             --live-bg: #ef4444;
             --channel-bg: #f8fafc;
             --channel-text: #334155;
-            --active-bg: #06b67f;
-            --active-text: #ffffff;
+            --active-bg: #ffcc00;
+            --active-text: #0f172a;
         }
 
         [data-theme="dark"] {
@@ -31,16 +31,16 @@
             --bg-container: #111827;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --accent: #22d3ee;
-            --accent-hover: #67e8f9;
-            --accent-gradient: linear-gradient(135deg, #22d3ee, #67e8f9);
+            --accent: #ffcc00;
+            --accent-hover: #ffaa00;
+            --accent-gradient: linear-gradient(135deg, #ffd700, #ff8c00, #ffcc00);
             --card-bg: #1e2937;
             --border: #334155;
             --shadow: rgba(0, 0, 0, 0.7);
             --live-bg: #f87171;
             --channel-bg: #1f2937;
             --channel-text: #e2e8f0;
-            --active-bg: #34d399;
+            --active-bg: #ffcc00;
             --active-text: #0f172a;
         }
 
@@ -121,7 +121,7 @@
         .theme-option.active {
             background: var(--accent);
             color: white;
-            box-shadow: 0 4px 15px rgba(6, 182, 127, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
         }
 
         .video-wrapper {
@@ -157,30 +157,64 @@
             margin-bottom: 40px;
         }
 
+        /* === NEW BUTTON STYLE inspired by your example === */
         .channel-btn {
             position: relative;
-            background-color: var(--channel-bg);
-            color: var(--channel-text);
-            border: 2px solid transparent;
-            padding: 20px 16px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ffcc00 100%);
+            color: #0f172a;
+            font-weight: 700;
             font-size: 15px;
-            font-weight: 600;
-            border-radius: 14px;
+            padding: 20px 16px;
+            border-radius: 12px;
+            border: 3px solid #ffffff;
+            box-shadow: 
+                0 8px 20px rgba(255, 180, 0, 0.6),
+                inset 0 2px 4px rgba(255,255,255,0.8),
+                inset 0 -4px 6px rgba(0,0,0,0.2);
             cursor: pointer;
-            box-shadow: 0 6px 16px var(--shadow);
             overflow: hidden;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .channel-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.9),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-150%) skewX(-25deg); }
+            20% { transform: translateX(300%) skewX(-25deg); }
+            100% { transform: translateX(300%) skewX(-25deg); }
         }
 
         .channel-btn:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(6, 182, 127, 0.3);
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 
+                0 15px 35px rgba(255, 140, 0, 0.7),
+                inset 0 2px 4px rgba(255,255,255,0.9);
         }
 
         .channel-btn.active {
-            background: var(--active-bg);
-            color: var(--active-text);
-            border-color: #10b981;
-            box-shadow: 0 0 25px rgba(52, 211, 153, 0.6);
+            background: linear-gradient(135deg, #ffdd00 0%, #ff9900 50%, #ffcc00 100%);
+            box-shadow: 
+                0 0 35px rgba(255, 200, 0, 0.9),
+                0 8px 20px rgba(255, 140, 0, 0.8),
+                inset 0 2px 6px rgba(255,255,255,0.9);
+            border-color: #ffffff;
         }
 
         /* Football Click Animation */
@@ -206,9 +240,9 @@
         }
 
         @keyframes glowPulse {
-            0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.8); }
-            70% { box-shadow: 0 0 0 20px rgba(34, 211, 238, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.9); }
+            70% { box-shadow: 0 0 0 30px rgba(255, 200, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 200, 0, 0); }
         }
 
         .notice-box {
@@ -258,7 +292,7 @@
     </div>
 
     <script>
-        // Theme Management (unchanged but optimized)
+        // Theme Management
         const body = document.body;
         const themeOptions = document.querySelectorAll('.theme-option');
 
@@ -308,11 +342,9 @@
             btn.dataset.video = ch.src;
 
             btn.addEventListener('click', function() {
-                // Remove active from others
                 document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active', 'glow-pulse'));
                 this.classList.add('active', 'glow-pulse');
 
-                // Football animation
                 const football = document.createElement('div');
                 football.className = 'football-animation';
                 football.textContent = '⚽';
@@ -322,7 +354,6 @@
 
                 setTimeout(() => football.remove(), 900);
 
-                // Switch video
                 videoSource.src = this.dataset.video;
                 player.load();
                 player.play();

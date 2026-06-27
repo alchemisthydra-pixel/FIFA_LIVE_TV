@@ -7,16 +7,17 @@
     <style>
         /* Base Reset & Variables */
         :root {
-            /* Light Theme - Fresh & Lively */
+            /* Light Theme */
             --bg-body: #f8fafc;
             --bg-container: #ffffff;
-            --text-primary: #1e2937;
-            --text-secondary: #64748b;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
             --accent: #06b67f;
             --accent-hover: #059669;
+            --accent-gradient: linear-gradient(135deg, #06b67f, #22d3ee);
             --card-bg: #f1f5f9;
             --border: #e2e8f0;
-            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow: rgba(15, 23, 42, 0.08);
             --live-bg: #ef4444;
             --channel-bg: #f8fafc;
             --channel-text: #334155;
@@ -25,16 +26,17 @@
         }
 
         [data-theme="dark"] {
-            /* Dark Theme - Vibrant Night Mode */
+            /* Dark Theme - Premium Night Mode */
             --bg-body: #0a0f1c;
             --bg-container: #111827;
-            --text-primary: #f1f5f9;
+            --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --accent: #22d3ee;
             --accent-hover: #67e8f9;
+            --accent-gradient: linear-gradient(135deg, #22d3ee, #67e8f9);
             --card-bg: #1e2937;
             --border: #334155;
-            --shadow: rgba(0, 0, 0, 0.6);
+            --shadow: rgba(0, 0, 0, 0.7);
             --live-bg: #f87171;
             --channel-bg: #1f2937;
             --channel-text: #e2e8f0;
@@ -46,8 +48,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -60,56 +62,48 @@
             padding: 20px;
         }
 
-        /* Container Card - More modern & lively */
         .tv-container {
             width: 100%;
             max-width: 1000px;
             background-color: var(--bg-container);
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 20px 40px var(--shadow);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 25px 50px var(--shadow);
             border: 1px solid var(--border);
         }
 
-        /* Header Setup */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
+            margin-bottom: 28px;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--accent), #67e8f9);
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-right: 12px;
+            letter-spacing: -1px;
         }
 
         .live-badge {
             background-color: var(--live-bg);
             color: white;
             font-size: 13px;
-            font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 20px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 9999px;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
         }
 
-        /* Theme Switcher */
         .theme-switcher {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: var(--card-bg);
             padding: 6px;
             border-radius: 9999px;
@@ -117,97 +111,116 @@
         }
 
         .theme-option {
-            padding: 6px 14px;
+            padding: 7px 16px;
             border-radius: 9999px;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .theme-option.active {
             background: var(--accent);
             color: white;
-            box-shadow: 0 4px 12px rgba(6, 182, 127, 0.3);
+            box-shadow: 0 4px 15px rgba(6, 182, 127, 0.4);
         }
 
-        /* Video Player Wrapper */
         .video-wrapper {
             width: 100%;
-            background-color: #000000;
-            border-radius: 12px;
+            background-color: #000;
+            border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 16 / 9;
             margin-bottom: 32px;
             border: 2px solid var(--border);
-            box-shadow: 0 10px 30px var(--shadow);
+            box-shadow: 0 15px 35px var(--shadow);
         }
 
-        video {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
+        video { width: 100%; height: 100%; display: block; }
 
-        /* Section Title */
         .section-title {
-            font-size: 17px;
+            font-size: 19px;
+            font-weight: 700;
             color: var(--text-secondary);
-            margin-bottom: 16px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 10px;
-            font-weight: 600;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--border);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
         }
 
-        /* Channel Grid Layout */
         .channel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+            gap: 18px;
             margin-bottom: 40px;
         }
 
-        /* Channel Buttons - Livelier */
         .channel-btn {
+            position: relative;
             background-color: var(--channel-bg);
             color: var(--channel-text);
             border: 2px solid transparent;
-            padding: 18px 14px;
-            font-size: 14.5px;
+            padding: 20px 16px;
+            font-size: 15px;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            box-shadow: 0 4px 12px var(--shadow);
+            box-shadow: 0 6px 16px var(--shadow);
+            overflow: hidden;
         }
 
         .channel-btn:hover {
-            background-color: var(--accent);
-            color: white;
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(6, 182, 127, 0.25);
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(6, 182, 127, 0.3);
         }
 
         .channel-btn.active {
-            background-color: var(--active-bg);
+            background: var(--active-bg);
             color: var(--active-text);
             border-color: #10b981;
-            box-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
-            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(52, 211, 153, 0.6);
         }
 
-        /* Notice Box Style */
+        /* Football Click Animation */
+        .football-animation {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0;
+            pointer-events: none;
+            animation: footballKick 0.8s ease-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes footballKick {
+            0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
+            40% { transform: scale(1.2) rotate(180deg); }
+            70% { transform: scale(1) rotate(360deg); }
+            100% { transform: translateY(-80px) scale(0.6) rotate(720deg); opacity: 0; }
+        }
+
+        /* Glow Pulse on Click */
+        .glow-pulse {
+            animation: glowPulse 0.6s ease-out;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.8); }
+            70% { box-shadow: 0 0 0 20px rgba(34, 211, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+        }
+
         .notice-box {
-            background-color: rgba(239, 68, 68, 0.06);
+            background: rgba(239, 68, 68, 0.05);
             border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 18px;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 13.5px;
-            line-height: 1.6;
-            max-width: 620px;
+            font-size: 13.8px;
+            line-height: 1.65;
+            max-width: 640px;
             margin: 0 auto;
         }
     </style>
@@ -221,7 +234,6 @@
                 <span class="live-badge">LIVE</span>
             </div>
             
-            <!-- Theme Switcher -->
             <div class="theme-switcher">
                 <div class="theme-option" data-theme-mode="light">☀️ Light</div>
                 <div class="theme-option active" data-theme-mode="dark">🌙 Dark</div>
@@ -232,18 +244,12 @@
         <div class="video-wrapper">
             <video id="main-player" controls autoplay muted>
                 <source id="video-source" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
         </div>
 
         <h3 class="section-title">চ্যানেল সমূহ</h3>
-        <div class="channel-grid">
-            <button class="channel-btn" data-video="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">Toffee Server 1</button>
-            <button class="channel-btn active" data-video="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4">Extreme 1 (4K)</button>
-            <button class="channel-btn" data-video="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4">Fox One 1 (Alt)</button>
-            <button class="channel-btn" data-video="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4">WC TV</button>
-            <button class="channel-btn" data-video="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4">W Sports</button>
-            <button class="channel-btn" data-video="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4">beIN XTRA</button>
+        <div class="channel-grid" id="channel-grid">
+            <!-- Buttons populated via JS for animation support -->
         </div>
 
         <div class="notice-box">
@@ -252,65 +258,80 @@
     </div>
 
     <script>
-        // Theme Management
+        // Theme Management (unchanged but optimized)
         const body = document.body;
         const themeOptions = document.querySelectorAll('.theme-option');
-        let currentMode = 'dark';
 
         function setTheme(mode) {
-            currentMode = mode;
-            
             if (mode === 'auto') {
                 const hour = new Date().getHours();
-                const isDay = hour >= 6 && hour < 20;
-                body.setAttribute('data-theme', isDay ? 'light' : 'dark');
+                body.setAttribute('data-theme', hour >= 6 && hour < 20 ? 'light' : 'dark');
             } else {
                 body.setAttribute('data-theme', mode);
             }
-            
-            // Update active state
             themeOptions.forEach(opt => {
                 opt.classList.toggle('active', opt.getAttribute('data-theme-mode') === mode);
             });
         }
 
-        // Theme switcher listeners
         themeOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const mode = option.getAttribute('data-theme-mode');
                 setTheme(mode);
-                
-                // Save preference
                 localStorage.setItem('hscThemeMode', mode);
             });
         });
 
-        // Load saved preference or default to auto
         function initTheme() {
-            const savedMode = localStorage.getItem('hscThemeMode') || 'auto';
-            setTheme(savedMode);
+            const saved = localStorage.getItem('hscThemeMode') || 'auto';
+            setTheme(saved);
         }
 
-        // Channel switching logic (unchanged)
-        const buttons = document.querySelectorAll('.channel-btn');
+        // Channel Data
+        const channels = [
+            { name: "Toffee Server 1", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+            { name: "Extreme 1 (4K)", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+            { name: "Fox One 1 (Alt)", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { name: "WC TV", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+            { name: "W Sports", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+            { name: "beIN XTRA", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
+        ];
+
+        const grid = document.getElementById('channel-grid');
         const player = document.getElementById('main-player');
         const videoSource = document.getElementById('video-source');
 
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelector('.channel-btn.active').classList.remove('active');
-                this.classList.add('active');
-                
-                const newSource = this.getAttribute('data-video');
-                videoSource.src = newSource;
+        channels.forEach((ch, index) => {
+            const btn = document.createElement('button');
+            btn.className = `channel-btn ${index === 1 ? 'active' : ''}`;
+            btn.textContent = ch.name;
+            btn.dataset.video = ch.src;
+
+            btn.addEventListener('click', function() {
+                // Remove active from others
+                document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active', 'glow-pulse'));
+                this.classList.add('active', 'glow-pulse');
+
+                // Football animation
+                const football = document.createElement('div');
+                football.className = 'football-animation';
+                football.textContent = '⚽';
+                football.style.left = `${Math.random() * 60 + 20}%`;
+                football.style.top = '40%';
+                this.appendChild(football);
+
+                setTimeout(() => football.remove(), 900);
+
+                // Switch video
+                videoSource.src = this.dataset.video;
                 player.load();
                 player.play();
             });
+
+            grid.appendChild(btn);
         });
 
-        // Initialize
         window.onload = initTheme;
     </script>
-
 </body>
 </html>

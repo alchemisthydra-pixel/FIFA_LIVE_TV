@@ -3,19 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <titlae>
+    <title>HSC_26 TV</title>
     <style>
         /* Base Reset & Variables */
+        :root {
+            /* Light Theme - Fresh & Lively */
+            --bg-body: #f8fafc;
+            --bg-container: #ffffff;
+            --text-primary: #1e2937;
+            --text-secondary: #64748b;
+            --accent: #06b67f;
+            --accent-hover: #059669;
+            --card-bg: #f1f5f9;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --live-bg: #ef4444;
+            --channel-bg: #f8fafc;
+            --channel-text: #334155;
+            --active-bg: #06b67f;
+            --active-text: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme - Vibrant Night Mode */
+            --bg-body: #0a0f1c;
+            --bg-container: #111827;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #22d3ee;
+            --accent-hover: #67e8f9;
+            --card-bg: #1e2937;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.6);
+            --live-bg: #f87171;
+            --channel-bg: #1f2937;
+            --channel-text: #e2e8f0;
+            --active-bg: #34d399;
+            --active-text: #0f172a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
-            background-color: #0b0f19;
-            color: #ffffff;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,50 +60,87 @@
             padding: 20px;
         }
 
-        /* Container Card */
+        /* Container Card - More modern & lively */
         .tv-container {
             width: 100%;
             max-width: 1000px;
-            background-color: #0d1321;
-            border-radius: 8px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background-color: var(--bg-container);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 40px var(--shadow);
+            border: 1px solid var(--border);
         }
 
         /* Header Setup */
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-right: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent), #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 12px;
         }
 
         .live-badge {
-            background-color: #ff3b30;
+            background-color: var(--live-bg);
             color: white;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 6px;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+        }
+
+        .theme-option {
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-option.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(6, 182, 127, 0.3);
         }
 
         /* Video Player Wrapper */
         .video-wrapper {
             width: 100%;
             background-color: #000000;
-            border-radius: 6px;
+            border-radius: 12px;
             overflow: hidden;
             aspect-ratio: 16 / 9;
-            margin-bottom: 30px;
-            border: 1px solid #1e293b;
+            margin-bottom: 32px;
+            border: 2px solid var(--border);
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         video {
@@ -77,69 +151,82 @@
 
         /* Section Title */
         .section-title {
-            font-size: 16px;
-            color: #94a3b8;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #1e293b;
-            padding-bottom: 8px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            font-weight: 600;
         }
 
         /* Channel Grid Layout */
         .channel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
             margin-bottom: 40px;
         }
 
-        /* Channel Buttons */
+        /* Channel Buttons - Livelier */
         .channel-btn {
-            background-color: #1a2333;
-            color: #e2e8f0;
-            border: none;
-            padding: 16px 12px;
-            font-size: 14px;
+            background-color: var(--channel-bg);
+            color: var(--channel-text);
+            border: 2px solid transparent;
+            padding: 18px 14px;
+            font-size: 14.5px;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px var(--shadow);
         }
 
         .channel-btn:hover {
-            background-color: #243249;
-            transform: translateY(-2px);
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(6, 182, 127, 0.25);
         }
 
-        /* Active Green State matching your screenshot */
         .channel-btn.active {
-            background-color: #00ff87;
-            color: #000000;
-            box-shadow: 0 0 15px rgba(0, 255, 135, 0.4);
+            background-color: var(--active-bg);
+            color: var(--active-text);
+            border-color: #10b981;
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+            transform: scale(1.02);
         }
 
         /* Notice Box Style */
         .notice-box {
-            background-color: rgba(239, 68, 68, 0.05);
+            background-color: rgba(239, 68, 68, 0.06);
             border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 6px;
-            padding: 15px;
+            border-radius: 10px;
+            padding: 16px;
             text-align: center;
-            color: #f87171;
-            font-size: 13px;
-            line-height: 1.5;
-            max-width: 600px;
+            color: var(--text-secondary);
+            font-size: 13.5px;
+            line-height: 1.6;
+            max-width: 620px;
             margin: 0 auto;
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
     <div class="tv-container">
         <div class="header">
-            <span class="logo">HSC_26 TV</span>
-            <span class="live-badge">Live</span>
+            <div class="header-left">
+                <span class="logo">HSC_26 TV</span>
+                <span class="live-badge">LIVE</span>
+            </div>
+            
+            <!-- Theme Switcher -->
+            <div class="theme-switcher">
+                <div class="theme-option" data-theme-mode="light">☀️ Light</div>
+                <div class="theme-option active" data-theme-mode="dark">🌙 Dark</div>
+                <div class="theme-option" data-theme-mode="auto">⏱ Auto</div>
+            </div>
         </div>
 
         <div class="video-wrapper">
@@ -165,27 +252,64 @@
     </div>
 
     <script>
+        // Theme Management
+        const body = document.body;
+        const themeOptions = document.querySelectorAll('.theme-option');
+        let currentMode = 'dark';
+
+        function setTheme(mode) {
+            currentMode = mode;
+            
+            if (mode === 'auto') {
+                const hour = new Date().getHours();
+                const isDay = hour >= 6 && hour < 20;
+                body.setAttribute('data-theme', isDay ? 'light' : 'dark');
+            } else {
+                body.setAttribute('data-theme', mode);
+            }
+            
+            // Update active state
+            themeOptions.forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-theme-mode') === mode);
+            });
+        }
+
+        // Theme switcher listeners
+        themeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const mode = option.getAttribute('data-theme-mode');
+                setTheme(mode);
+                
+                // Save preference
+                localStorage.setItem('hscThemeMode', mode);
+            });
+        });
+
+        // Load saved preference or default to auto
+        function initTheme() {
+            const savedMode = localStorage.getItem('hscThemeMode') || 'auto';
+            setTheme(savedMode);
+        }
+
+        // Channel switching logic (unchanged)
         const buttons = document.querySelectorAll('.channel-btn');
         const player = document.getElementById('main-player');
         const videoSource = document.getElementById('video-source');
 
         buttons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove 'active' status from previous button
                 document.querySelector('.channel-btn.active').classList.remove('active');
-                
-                // Add 'active' status to clicked button
                 this.classList.add('active');
                 
-                // Get new video stream source from 'data-video' attribute
                 const newSource = this.getAttribute('data-video');
-                
-                // Update player and reload stream
                 videoSource.src = newSource;
                 player.load();
                 player.play();
             });
         });
+
+        // Initialize
+        window.onload = initTheme;
     </script>
 
 </body>
